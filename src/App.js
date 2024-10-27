@@ -10,6 +10,7 @@ class App {
 
       this.handleErrors(input);
       const data = this.printHistory(input, input2);
+      this.printWinner(data);
 
     } catch (error) {
       if (!error.message.startsWith("[ERROR]")) {
@@ -67,6 +68,26 @@ class App {
       }
 
       return data;
+  }
+
+  printWinner(data){
+    let finalScores = [];
+
+    for(let i = 0; i < data.length; i++){
+      finalScores.push(data[i].scores.length);
+    }
+
+    let maxScore = Math.max(...finalScores);
+
+    let finalists = [];
+
+    for(let i = 0; i < data.length; i++){
+      if(finalScores[i] == maxScore){
+        finalists.push(data[i].name);
+      }
+    }
+
+    Console.print(`최종 우승자 : ${finalists.join(", ")}`);
   }
 
 }
